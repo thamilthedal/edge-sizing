@@ -36,5 +36,4 @@ def calculate_smallD(L, ND, bf):
 def calculate_y_water(T, P, G, L, yPlus):
 	state = IAPWS97(P=P/1e6, T=T)
 	U = G/state.rho
-	print(state.rho, U)
 	return calculate_y(state.rho, U, L, state.mu, yPlus)
