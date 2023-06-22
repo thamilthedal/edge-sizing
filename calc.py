@@ -37,3 +37,14 @@ def calculate_y_water(T, P, G, L, yPlus):
 	state = IAPWS97(P=P/1e6, T=T)
 	U = G/state.rho
 	return calculate_y(state.rho, U, L, state.mu, yPlus)
+
+def calculate_BF(L, ND, L1):
+	test_list = list(np.arange(1, 31, 0.001))
+	dummy = calculate_smallD(L, ND, np.arange(1, 31, 0.001))
+	error = abs(dummy - L1)/L1
+	index = np.where(error == min(error))[0][0]
+	
+	if test_list[index] < 20:
+		return test_list[index]
+	else:
+		raise ValueError('Bias factor is going too high (> 20) which will affect aspect ratio. Change Mesh settings.')

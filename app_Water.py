@@ -1,5 +1,5 @@
 import streamlit as st
-from calc import calculate_y_water, calculate_smallD
+from calc import calculate_y_water, calculate_smallD, calculate_BF
 
 title = st.title(r"$\Delta x_{min}(T, P, L, G, y^+)\ for\ Water$")
 
@@ -36,11 +36,15 @@ bf = col3.text_input("Bias-factor to apply:", key = 'bf', value = '0.0')
 if st.button("Calculate"):
 	result = calculate_y_water(float(T), float(P), float(G), float(L), float(yPlus))
 	result2 = calculate_smallD(float(L)/2, int(ND), float(bf))
-	
+	result3 = calculate_BF(float(L)/2, int(ND), result)
+
 	col1, col2 = st.columns(2)
 	with st.container():
 		col1.success(r'$\Delta x_{min}$ for the $y^+$ is ' + f'{result:{3}.{5}}' + ' m')
 		col2.success(r'$\Delta x_{min}$ for the mesh is ' + f'{result2:{3}.{5}}' + ' m')
+
+	with st.container():
+		st.success(r'Recommended bias factor for the given $y^+$ could be '+ f'{result3:{1}.{4}}')
 
 
 with st.expander(r"Code for calculating $\Delta x_{min}$ for the mesh"):
@@ -52,5 +56,17 @@ with st.expander(r"Code for calculating $\Delta x_{min}$ for the mesh"):
 	L1 = L/sum
 	
 	return L1'''
+
+	st.code(code, language='python')
+
+
+with st.expander(r'Code for calculating recommended bias factor'):
+	code = '''def calculate_BF(L, ND, L1):
+	test_list = list(np.arange(1, 31, 0.001))
+	dummy = calculate_smallD(L, ND, np.arange(1, 31, 0.001))
+	error = abs(dummy - L1)/L1
+	index = np.where(error == min(error))[0][0]
+	
+	return test_list[index]'''
 
 	st.code(code, language='python')
