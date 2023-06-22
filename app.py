@@ -1,5 +1,5 @@
 import streamlit as st
-from calc import calculate_y, calculate_smallD
+from calc import calculate_y, calculate_smallD, calculate_BF
 
 title = st.title(r"$\Delta x_{min}(\rho, \mu, L, U_\infty, y^+)$")
 caption = st.caption("Calculates the smallest cell size for given $y^+$ and mesh details for ANSYS Meshing.")
@@ -34,11 +34,15 @@ bf = col3.text_input("Bias-factor to apply:", key = 'bf', value = '0.0')
 if st.button("Calculate"):
 	result = calculate_y(float(rho), float(U), float(L), float(mu), float(yPlus))
 	result2 = calculate_smallD(float(L)/2, int(ND), float(bf))
+	result3 = calculate_BF(float(L)/2, int(ND), result)
 
 	col1, col2 = st.columns(2)
 	with st.container():
 		col1.success(r'$\Delta x_{min}$ for the $y^+$ is ' + f'{result:{3}.{5}}' + ' m')
 		col2.success(r'$\Delta x_{min}$ for the mesh is ' + f'{result2:{3}.{5}}' + ' m')
+
+	with st.container():
+		st.success(r'Recommended bias factor for the given $y^+$ could be '+ f'{result3:{1}.{4}}')
 
 with st.expander(r"Code for calculating $\Delta x_{min}$ for the mesh"):d
 	code = '''def calculate_smallD(L, ND, bf):
