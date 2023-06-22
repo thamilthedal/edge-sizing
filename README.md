@@ -1,5 +1,5 @@
 # edge-sizing
-Edge Sizing and y+ Calculation in ANSYS Meshing
+Edge Sizing in ANSYS Meshing
 
 This contains two different options.
 
@@ -8,11 +8,11 @@ This contains two different options.
 
 ## app.py
 
-This contains general edge sizing app where y+ is calculated for a turbulent pipe flow with input properties and velocity and geometry parameters.
+This contains general edge sizing app where smallest cell size is calculated for given $y^+$ in a turbulent pipe flow with input properties and velocity and mesh parameters and recommend a closer bias factor for the given $y^+$.
 
 ## app_Water.py
 
-This can calculate the thermophysical properties for Water from IAPWS module from initial temperature and properties and calculate the smallest cell size and y+ accordingly.
+This can calculate the thermophysical properties for Water from IAPWS module from initial temperature and properties and calculate the smallest cell size and a recommended bias factor accordingly.
 
 ## Calculation module:
 
