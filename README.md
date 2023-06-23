@@ -1,20 +1,14 @@
 # edge-sizing
-Edge Sizing in ANSYS Meshing
+## Edge Sizing in ANSYS Meshing
+
+This is a general edge sizing app where smallest cell size is calculated for given $y^+$ in a turbulent pipe flow with input properties and velocity and mesh parameters and recommend a closer bias factor for the given $y^+$.
 
 This contains two different options.
 
 1. Water
 2. Other Fluids
 
-<<<<<<< HEAD
 ## Water
-=======
-## app.py
-
-This contains general edge sizing app where smallest cell size is calculated for given $y^+$ in a turbulent pipe flow with input properties and velocity and mesh parameters and recommend a closer bias factor for the given $y^+$.
-
-## app_Water.py
->>>>>>> 68665702c885a43f8e5e12842d94272293b9b203
 
 This can calculate the thermophysical properties for Water from IAPWS module from initial temperature and properties and calculate the smallest cell size and a recommended bias factor accordingly.
 
@@ -49,3 +43,6 @@ The Edge Sizing method in ANSYS Meshing works by a simple geometric progression 
 $$
 \Delta x_{min} = \frac{L}{\Sigma_{i = 0}^{N} (bf^{(1/N-1)})^i}
 $$
+
+### Recommended Bias factor
+This runs the Small cell utility for multiple bias factors from 1 to 31 with a step of 0.01 and find the closest value to the Small cell size given by $y^+$ and recommend that bias factor to be used for the given $y^+$.
