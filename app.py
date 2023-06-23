@@ -118,14 +118,11 @@ with st.expander(r'Code for calculating $\Delta x_{min}$ for the mesh'):
 with st.expander('Code for calculating recommended bias factor'):
 
     code = '''def calculate_BF(L, ND, L1):
-    print(L, ND, L1)    
     test_list = list(np.arange(1, 31, 0.001))
     dummy = calculate_smallD(L, ND, np.arange(1, 31, 0.001))
     error = abs(dummy - L1)/L1
     index = np.where(error == min(error))[0][0]
     
-    print(test_list[index])
-
     if test_list[index] < 30:
         return test_list[index]
     else:
