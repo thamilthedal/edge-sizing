@@ -94,7 +94,6 @@ if st.button("Calculate"):
         col2.success(r'$\Delta x_{min}$ for the mesh is ' + f'{result2:{3}.{5}}' + ' m')
 
     with st.container():
-        print(result3)
         if result3 != 0.0:
             st.success(r'Recommended bias factor for the given $y^+$ could be ' + f'{result3:{1}.{4}}')
         else:
