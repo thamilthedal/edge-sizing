@@ -4,10 +4,15 @@ from calc import calculate_y, calculate_smallD, calculate_y_water, calculate_BF
 
 title = st.title(r"$\Delta x_{min}(L, N_D, BF, y^+)$")
 
+st.sidebar.write('Made by Thedal')
+st.sidebar.markdown('''
+- [Github Repo](https://github.com/thamilthedal/edge-sizing)
+- [About me](https://thamilthedal.github.io/)
+- [Instagram](https://www.instagram.com/thamilthedal/)
+''', unsafe_allow_html=True)
+
 caption = st.caption(
     "Calculates the smallest cell size for given $y^+$ and mesh details for ANSYS Meshing.")
-
-st.divider()
 
 chosen_id = stx.tab_bar(data=[
     stx.TabBarItemData(id="tab1", title="Water", description=" "),
