@@ -41,17 +41,17 @@ else:
 
     rho = col1.text_input("Density ($kg/m^3$):", key='rho', value='0.0')
 
-    mu = col2.text_input("Dynamic viscosity ($Pa\ s$):", key='mu', value='0.0')
+    mu = col2.text_input(r"Dynamic viscosity ($Pa\ s$):", key='mu', value='0.0')
 
     st.markdown("**Enter other flow parameters:**")
 
     col1, col2 = st.columns(2)
 
     U = col1.text_input(
-        "Freestream velocity of the flow ($m/s$):", key='U', value='0.0')
+        r"Freestream velocity of the flow ($m/s$):", key='U', value='0.0')
 
     yPlus_General = col2.text_input(
-        "$y^+$ value near the wall:", key='yPlus_General', value='0.0')
+        r"$y^+$ value near the wall:", key='yPlus_General', value='0.0')
 
 
 st.markdown("**Enter edge sizing details:**")
@@ -66,11 +66,19 @@ bf = col3.text_input("Bias-factor to apply:", key='bf', value='0.0')
 
 if st.button("Calculate"):
     if chosen_id == "tab1":
-        result = calculate_y_water(float(T), float(
+        input_error = [T, P, G, yPlus_Water]
+        if '0.0' in input_error:
+            st.error("Invalid input")
+        else:
+            result = calculate_y_water(float(T), float(
             P), float(G), float(L), float(yPlus_Water))
     else:
-        result = calculate_y(float(rho), float(U), float(
-            L), float(mu), float(yPlus_General))
+        input_error = [rho, mu, U, yPlus_General]
+        if '0.0' in input_error:
+            st.error("Invalid input")
+        else:
+            result = calculate_y(float(rho), float(U), float(
+                L), float(mu), float(yPlus_General))
 
     result2 = calculate_smallD(float(L)/2, int(ND), float(bf))
     result3 = calculate_BF(float(L)/2, int(ND), result)
