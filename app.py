@@ -12,7 +12,7 @@ st.sidebar.markdown('''
 ''', unsafe_allow_html=True)
 
 caption = st.caption(
-    "Calculates the smallest cell size for given $y^+$ and mesh details for ANSYS Meshing.")
+    "Calculates the smallest cell size for given $y^+$ for a turbulent pipe flow and mesh details for ANSYS Meshing.")
 
 chosen_id = stx.tab_bar(data=[
     stx.TabBarItemData(id="tab1", title="Water", description=" "),
