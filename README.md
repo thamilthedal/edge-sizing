@@ -28,7 +28,7 @@ $$
 ### Smallest Cell Size for given $y^+$
 
 $$
-\Delta x_{min} = \frac{y^+ \mu}{\rho u^*} 
+\Delta x_{min} = \frac{2 y^+ \mu}{\rho u^*} 
 $$
 
 where $u^*$ is calcualted as,

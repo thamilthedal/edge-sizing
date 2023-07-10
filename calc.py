@@ -22,7 +22,7 @@ def calculate_y(rho, U, L, mu, yPlus):
 	tw = calculate_wall_shear(cf, U, rho)
 	ustar = calculate_ustar(tw, rho)
 
-	return (yPlus*mu)/(rho*ustar)
+	return (2*yPlus*mu)/(rho*ustar)
 
 def calculate_smallD(L, ND, bf):
 	sum = 0
