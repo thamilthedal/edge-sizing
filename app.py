@@ -13,10 +13,9 @@ st.sidebar.markdown('''
 caption = st.caption(
     "Calculates the smallest cell size for given $y^+$ for a turbulent pipe flow and mesh details for ANSYS Meshing.")
 
-tab1, tab2 = st.tabs(["Water", "Others"])
+fluid = st.selectbox(["Water", "Others"])
 
-with tab1:
-    chosen_id = "tab1"
+if fluid == "Water":
     st.markdown("**Enter the state of the water:**")
     col1, col2 = st.columns(2)
 
@@ -32,8 +31,7 @@ with tab1:
     yPlus_Water = col2.text_input(
         "$y^+$ value near the wall:", key='yPlus_Water', value='0.0')
 
-with tab2:
-    chosen_id = "tab2"
+else:
     st.markdown("**Enter the thermophysical properties of the fluid:**")
     col1, col2 = st.columns(2)
 
@@ -62,7 +60,7 @@ ND = col2.text_input("Number of divisions to be made:", key='ND', value='0')
 bf = col3.text_input("Bias-factor to apply:", key='bf', value='0.0')
 
 if st.button("Calculate"):
-    if chosen_id == "tab1":
+    if fluid == "Water":
         input_error = [T, P, G, yPlus_Water]
         if '0.0' in input_error:
             st.error("Invalid input")
