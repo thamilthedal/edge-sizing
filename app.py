@@ -13,7 +13,7 @@ st.sidebar.markdown('''
 caption = st.caption(
     "Calculates the smallest cell size for given $y^+$ for a turbulent pipe flow and mesh details for ANSYS Meshing.")
 
-fluid = st.selectbox(["Water", "Others"])
+fluid = st.selectbox("Select Fluid:", options = ["Water", "Others"])
 
 if fluid == "Water":
     st.markdown("**Enter the state of the water:**")
