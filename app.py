@@ -1,5 +1,4 @@
 import streamlit as st
-import extra_streamlit_components as stx
 from calc import calculate_y, calculate_smallD, calculate_y_water, calculate_BF
 
 title = st.title(r"$\Delta x_{min}(L, N_D, BF, y^+)$")
@@ -14,18 +13,14 @@ st.sidebar.markdown('''
 caption = st.caption(
     "Calculates the smallest cell size for given $y^+$ for a turbulent pipe flow and mesh details for ANSYS Meshing.")
 
-chosen_id = stx.tab_bar(data=[
-    stx.TabBarItemData(id="tab1", title="Water", description=" "),
-    stx.TabBarItemData(id="tab2", title="Other Fluids", description=" ")])
+tab1, tab2 = st.tabs(["Water", "Others"])
 
-if chosen_id == "tab1":
-
+with tab1:
+    chosen_id = "tab1"
     st.markdown("**Enter the state of the water:**")
-
     col1, col2 = st.columns(2)
 
     T = col1.text_input("Temperature (K):", key='T', value='0.0')
-
     P = col2.text_input("Pressure ($Pa$):", key='P', value='0.0')
 
     st.markdown("**Enter other flow parameters:**")
@@ -34,18 +29,15 @@ if chosen_id == "tab1":
 
     G = col1.text_input(
         "Mass velocity of the flow ($kg/m^2 s$):", key='G', value='0.0')
-
     yPlus_Water = col2.text_input(
         "$y^+$ value near the wall:", key='yPlus_Water', value='0.0')
 
-else:
-
+with tab2:
+    chosen_id = "tab2"
     st.markdown("**Enter the thermophysical properties of the fluid:**")
-
     col1, col2 = st.columns(2)
 
     rho = col1.text_input("Density ($kg/m^3$):", key='rho', value='0.0')
-
     mu = col2.text_input(r"Dynamic viscosity ($Pa\ s$):", key='mu', value='0.0')
 
     st.markdown("**Enter other flow parameters:**")
