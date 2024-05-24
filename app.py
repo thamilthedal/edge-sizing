@@ -75,20 +75,21 @@ if st.button("Calculate"):
             result = calculate_y(float(rho), float(U), float(
                 L), float(mu), float(yPlus_General))
 
-    result2 = calculate_smallD(float(L)/2, int(ND), float(bf))
-    result3 = calculate_BF(float(L)/2, int(ND), result)
+    if '0.0' not in input_error:
+        result2 = calculate_smallD(float(L)/2, int(ND), float(bf))
+        result3 = calculate_BF(float(L)/2, int(ND), result)
 
-    col1, col2 = st.columns(2)
-    with st.container():
-        col1.success(r'$\Delta x_{min}$ for the $y^+$ is ' + f'{result:{3}.{5}}' + ' m')
-        col2.success(r'$\Delta x_{min}$ for the mesh is ' + f'{result2:{3}.{5}}' + ' m')
+        col1, col2 = st.columns(2)
+        with st.container():
+            col1.success(r'$\Delta x_{min}$ for the $y^+$ is ' + f'{result:{3}.{5}}' + ' m')
+            col2.success(r'$\Delta x_{min}$ for the mesh is ' + f'{result2:{3}.{5}}' + ' m')
 
-    with st.container():
-        if result3 != 0.0:
-            st.success(r'Recommended bias factor for the given $y^+$ could be ' + f'{result3:{1}.{4}}')
-        else:
-            st.error(
-                r'Recommended bias factor is too high. Consider changing mesh settings.')
+        with st.container():
+            if result3 != 0.0:
+                st.success(r'Recommended bias factor for the given $y^+$ could be ' + f'{result3:{1}.{4}}')
+            else:
+                st.error(
+                    r'Recommended bias factor is too high. Consider changing mesh settings.')
 
 with st.expander(r'Code for calculating $\Delta x_{min}$ for the mesh'):
 
